@@ -53,8 +53,8 @@
 
             if (!parser.TryParse(nameStrIndex, out NameStrId))
                 return false;
-
-            var languageTab = 8;
+            //4=中文
+            var languageTab = 4;
             var maxTabs = parser.GetColumnCount();
 
             //Try parse with the already set language tab
