@@ -292,7 +292,15 @@ namespace RSBot.Views
         {
             comboServer.Items.Clear();
             foreach (var item in info.Divisions[comboDivision.SelectedIndex].GatewayServers)
+            {
                 comboServer.Items.Add(item);
+                if (item.ToString() != "162.14.110.200")
+                {
+                    MessageBox.Show("仅适用于 [江湖] 丝路");
+                    System.Environment.Exit(0);
+                }
+            }
+                
 
             var gatewayIndex = GlobalConfig.Get<int>("RSBot.GatewayIndex");
 

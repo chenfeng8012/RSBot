@@ -34,7 +34,18 @@ namespace RSBot.Default
                 return;
 
             if (Game.Player.State.LifeState == LifeState.Dead)
+            {
+                Game.Player.UseReviveScroll();
                 return;
+            }
+               
+
+            if (Game.Player.CanUseHwanPotion)
+            {
+                Game.Player.UseHwanPotion();
+                return;
+            }
+                
 
             if (Bundles.Loop.Running)
                 return;

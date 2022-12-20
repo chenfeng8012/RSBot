@@ -93,6 +93,7 @@ namespace RSBot.Core.Objects
         ///   <c>true</c> if this instance can use berzerk; otherwise, <c>false</c>.
         /// </value>
         public bool CanEnterBerzerk => BerzerkPoints == 5 && State.BodyState != BodyState.Hwan;
+              
 
         /// <summary>
         /// Gets or sets the experience.
@@ -565,6 +566,11 @@ namespace RSBot.Core.Objects
         private int _lastMpPotionTick;
 
         /// <summary>
+        /// Gets or sets the last Hwan potion item tick count
+        /// </summary>
+        private int _lastHwpPotionTick;
+
+        /// <summary>
         /// Gets or sets the last vigor potion item tick count
         /// </summary>
         private int _lastVigorPotionTick;
@@ -781,6 +787,7 @@ namespace RSBot.Core.Objects
             return UsePotion(new TypeIdFilter(3, 3, 1, 2), ref _lastMpPotionTick, ref _lastMPDuration);
         }
 
+        
         /// <summary>
         /// Uses the vigor potion.
         /// </summary>
@@ -837,6 +844,8 @@ namespace RSBot.Core.Objects
 
             return result;
         }
+
+       
 
         /// <summary>
         /// Summons the ability pet.
@@ -1055,5 +1064,48 @@ namespace RSBot.Core.Objects
 
             return abilitySkills.Any();
         }
+
+        //my code area，我的代码
+        /// <summary>
+        /// Gets a value indicating whether this instance can use hwan potion.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can use hwan potion; otherwise, <c>false</c>.
+        /// </value>
+        public bool CanUseHwanPotion => BerzerkPoints != 5 && State.BodyState != BodyState.Hwan&& State.LifeState != LifeState.Dead;
+        public bool CanUseReviveScroll => State.LifeState == LifeState.Dead;
+
+        //使用复活卷轴
+        public bool UseReviveScroll()
+        {
+            if (State.LifeState == LifeState.Alive)
+                return false;
+
+            Thread.Sleep(5000);
+            var typeIdFilter = new TypeIdFilter(3, 3, 13, 6);
+            var slotItem = Inventory.GetItem(item => typeIdFilter.EqualsRefItem(item.Record) && item.Record.ReqLevel1 <= Game.Player.Level);
+            if (slotItem == null)
+                return false;
+
+            return slotItem.Use();
+        }
+        /// <summary>
+        /// Uses the Hwan potion.吃焕药
+        /// </summary>
+        /// <returns></returns>
+        public bool UseHwanPotion()
+        {
+            Console.WriteLine("use HwanPotion");
+            if (State.LifeState == LifeState.Dead)
+                return false;
+
+            var typeIdFilter = new TypeIdFilter(3, 3, 1, 8);
+            var slotItem = Inventory.GetItem(item => typeIdFilter.EqualsRefItem(item.Record) && item.Record.ReqLevel1 <= Game.Player.Level);
+            if (slotItem == null)
+                return false;
+
+            return slotItem.Use();            
+        }
+
     }
 }

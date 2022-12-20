@@ -81,6 +81,7 @@
             this.linkAttackWeakerMobsHelp = new System.Windows.Forms.LinkLabel();
             this.checkAttackWeakerFirst = new SDUI.Controls.CheckBox();
             this.checkBoxDimensionPillar = new SDUI.Controls.CheckBox();
+            this.checkBox1 = new SDUI.Controls.CheckBox();
             this.groupBox2.SuspendLayout();
             this.ctxAvoidance.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -166,37 +167,38 @@
             this.toolStripSeparator1,
             this.btnNoCustomBehavior});
             this.ctxAvoidance.Name = "ctxAvoidance";
-            this.ctxAvoidance.Size = new System.Drawing.Size(183, 76);
+            this.ctxAvoidance.Size = new System.Drawing.Size(196, 76);
             // 
             // btnAvoid
             // 
             this.btnAvoid.Name = "btnAvoid";
-            this.btnAvoid.Size = new System.Drawing.Size(182, 22);
+            this.btnAvoid.Size = new System.Drawing.Size(195, 22);
             this.btnAvoid.Text = "Avoid";
             this.btnAvoid.Click += new System.EventHandler(this.btnAvoid_Click);
             // 
             // btnPrefer
             // 
             this.btnPrefer.Name = "btnPrefer";
-            this.btnPrefer.Size = new System.Drawing.Size(182, 22);
+            this.btnPrefer.Size = new System.Drawing.Size(195, 22);
             this.btnPrefer.Text = "Prefer";
             this.btnPrefer.Click += new System.EventHandler(this.btnPrefer_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
             // 
             // btnNoCustomBehavior
             // 
             this.btnNoCustomBehavior.Name = "btnNoCustomBehavior";
-            this.btnNoCustomBehavior.Size = new System.Drawing.Size(182, 22);
+            this.btnNoCustomBehavior.Size = new System.Drawing.Size(195, 22);
             this.btnNoCustomBehavior.Text = "No custom behavior";
             this.btnNoCustomBehavior.Click += new System.EventHandler(this.btnNoCustomBehavior_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.checkBox1);
             this.groupBox3.Controls.Add(this.linkRecord);
             this.groupBox3.Controls.Add(this.checkBoxUseReverse);
             this.groupBox3.Controls.Add(this.checkUseSpeedDrug);
@@ -210,7 +212,7 @@
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.groupBox3.Radius = 10;
             this.groupBox3.ShadowDepth = 4;
-            this.groupBox3.Size = new System.Drawing.Size(478, 117);
+            this.groupBox3.Size = new System.Drawing.Size(478, 144);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Back to training";
@@ -335,7 +337,7 @@
             this.groupBox4.Controls.Add(this.checkBerzerkAvoidance);
             this.groupBox4.Controls.Add(this.checkBerzerkMonsterAmount);
             this.groupBox4.Controls.Add(this.checkBerzerkWhenFull);
-            this.groupBox4.Location = new System.Drawing.Point(262, 144);
+            this.groupBox4.Location = new System.Drawing.Point(262, 176);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.groupBox4.Radius = 10;
@@ -577,7 +579,7 @@
             this.groupBoxIgnores.Controls.Add(this.linkAttackWeakerMobsHelp);
             this.groupBoxIgnores.Controls.Add(this.checkAttackWeakerFirst);
             this.groupBoxIgnores.Controls.Add(this.checkBoxDimensionPillar);
-            this.groupBoxIgnores.Location = new System.Drawing.Point(262, 275);
+            this.groupBoxIgnores.Location = new System.Drawing.Point(262, 319);
             this.groupBoxIgnores.Name = "groupBoxIgnores";
             this.groupBoxIgnores.Padding = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.groupBoxIgnores.Radius = 10;
@@ -623,6 +625,18 @@
             this.checkBoxDimensionPillar.Text = "Ignore Dimension Pillar";
             this.checkBoxDimensionPillar.UseVisualStyleBackColor = false;
             this.checkBoxDimensionPillar.CheckedChanged += new System.EventHandler(this.checkBoxIgnorePillars_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox1.Location = new System.Drawing.Point(21, 105);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.ShadowDepth = 1;
+            this.checkBox1.Size = new System.Drawing.Size(111, 15);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "Use Revive Scroll";
+            this.checkBox1.UseVisualStyleBackColor = false;
             // 
             // Main
             // 
@@ -693,5 +707,6 @@
         private SDUI.Controls.CheckBox checkAttackWeakerFirst;
         private System.Windows.Forms.LinkLabel linkAttackWeakerMobsHelp;
         private System.Windows.Forms.LinkLabel linkRecord;
+        private SDUI.Controls.CheckBox checkBox1;
     }
 }

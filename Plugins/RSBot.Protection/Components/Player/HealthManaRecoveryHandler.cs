@@ -1,6 +1,8 @@
 ﻿using RSBot.Core;
 using RSBot.Core.Event;
 using RSBot.Core.Objects;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RSBot.Protection.Components.Player
 {
@@ -58,6 +60,7 @@ namespace RSBot.Protection.Components.Player
             if (manaPercent <= minMana)
                 Game.Player.UseManaPotion();
         }
+        
 
         /// <summary>
         /// On tick
@@ -65,7 +68,10 @@ namespace RSBot.Protection.Components.Player
         private static void OnTick()
         {
             OnUpdateHP();
-            OnUpdateMP();
+            OnUpdateMP();           
+        }
+        
+                
         }
     }
 }
