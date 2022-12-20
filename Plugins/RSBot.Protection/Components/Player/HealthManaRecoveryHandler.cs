@@ -71,7 +71,5 @@ namespace RSBot.Protection.Components.Player
             OnUpdateMP();           
         }
         
-                
-        }
     }
 }
