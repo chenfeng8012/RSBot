@@ -1,5 +1,6 @@
 ﻿using RSBot.Core;
 using RSBot.Core.Components;
+using RSBot.Core.Event;
 using RSBot.Core.Objects;
 using RSBot.Default.Bundle;
 using System;
@@ -22,7 +23,7 @@ namespace RSBot.Default.Bot
         /// </summary>
         public Botbase()
         {
-            Reload();
+            EventManager.SubscribeEvent("OnSetTrainingArea", Reload);
         }
 
         /// <summary>
@@ -33,8 +34,10 @@ namespace RSBot.Default.Bot
             Area = new Area
             {
                 Position = new Position(
+                    PlayerConfig.Get<ushort>("RSBot.Area.Region"),
                     PlayerConfig.Get<float>("RSBot.Area.X"),
-                    PlayerConfig.Get<float>("RSBot.Area.Y")),
+                    PlayerConfig.Get<float>("RSBot.Area.Y"),
+                    PlayerConfig.Get<float>("RSBot.Area.Z")),
                 Radius = Math.Clamp(PlayerConfig.Get<int>("RSBot.Area.Radius", 50), 5, 100)
             };
         }

@@ -47,6 +47,10 @@ namespace RSBot.Default
             }
                 
 
+            //Begin the loopback if needed
+            if (Container.Bot.Area.Position.DistanceToPlayer() > 80)
+                Bundles.Loop.Start();
+
             if (Bundles.Loop.Running)
                 return;
 
@@ -81,7 +85,6 @@ namespace RSBot.Default
             Container.Bot = new();
 
             Bundles.Reload();
-            Container.Bot.Reload();
 
             Subscriber.BundleSubscriber.SubscribeEvents();
             Subscriber.ConfigSubscriber.SubscribeEvents();
@@ -95,9 +98,7 @@ namespace RSBot.Default
         /// </summary>
         public void Start()
         {
-            var x = PlayerConfig.Get<float>("RSBot.Area.X", 0);
-            var y = PlayerConfig.Get<float>("RSBot.Area.Y", 0);
-            if (x == 0 && y == 0)
+            if (Kernel.Bot.Botbase.Area.Position.X == 0)
             {
                 Log.WarnLang("ConfigureTrainingAreaBeforeStartBot");
                 Kernel.Bot.Stop();
@@ -105,12 +106,9 @@ namespace RSBot.Default
                 return;
             }
 
-            Bundles.Reload();
-            Container.Bot.Reload();
-
-            //Begin the loopback
-            if (Container.Bot.Area.Position.DistanceToPlayer() > 80)
-                Bundles.Loop.Start();
+            //Already reloading when config saved via ConfigSubscriber
+            //Bundles.Reload();
+            //Container.Bot.Reload();
         }
 
         /// <summary>

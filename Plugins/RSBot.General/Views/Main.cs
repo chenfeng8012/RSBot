@@ -74,7 +74,7 @@ namespace RSBot.General.Views
                 btnStartClient.Enabled = true;
                 btnStartClientless.Enabled = true;
                 btnStartClientless.Text = LanguageManager.GetLang("Start") + " Clientless";
-                BotWindow.SetStatusText("Ready");
+                Log.StatusLang("Ready");
                 Kernel.Proxy.Shutdown();
             }
         }
@@ -211,26 +211,27 @@ namespace RSBot.General.Views
         /// </summary>
         private void OnExitClient()
         {
+            Log.StatusLang("Ready");
             _clientVisible = false;
             btnStartClient.Text = LanguageManager.GetLang("Start") + " Client";
 
             if (Game.Clientless)
                 return;
 
+            btnStartClient.Enabled = true;
             btnStartClientless.Enabled = true;
             btnClientHideShow.Enabled = false;
 
             if (!GlobalConfig.Get<bool>("RSBot.General.StayConnected"))
             {
-                btnStartClient.Enabled = true;
                 Kernel.Proxy.Shutdown();
             }
             else
             {
-                btnStartClient.Enabled = false;
-
                 if (!Kernel.Proxy.IsConnectedToAgentserver)
                     return;
+
+                btnStartClient.Enabled = false;
 
                 ClientlessManager.GoClientless();
 
@@ -299,13 +300,16 @@ namespace RSBot.General.Views
                 return;
 
             // If user disconnected with manual from clientless, we dont need open the client automatically again.
-            if (!Kernel.Proxy.ClientConnected)
-                return;
+            //if (!Kernel.Proxy.ClientConnected)
+                //return;
 
             ClientManager.Kill();
 
             if (GlobalConfig.Get<bool>("RSBot.General.EnableAutomatedLogin"))
             {
+                btnStartClient.Enabled = false;
+                btnStartClientless.Enabled = false;
+
                 Thread.Sleep(2000);
 
                 StartClientProcess();
@@ -509,7 +513,7 @@ namespace RSBot.General.Views
                 btnClientHideShow.Enabled = false;
 
                 Game.Clientless = true;
-                BotWindow.SetStatusTextLang("StartingClientless");
+                Log.StatusLang("StartingClientless");
                 Game.Start();
 
                 btnStartClientless.Text = LanguageManager.GetLang("Disconnect");

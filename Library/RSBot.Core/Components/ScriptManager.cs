@@ -14,7 +14,7 @@ namespace RSBot.Core.Components
         /// <summary>
         /// Gets the initial directory
         /// </summary>
-        public static string InitialDirectory => Path.Combine(Environment.CurrentDirectory, "Data", "Scripts");
+        public static string InitialDirectory => Path.Combine(Kernel.BasePath, "Data", "Scripts");
 
         /// <summary>
         /// Gets or sets the file.
@@ -135,7 +135,7 @@ namespace RSBot.Core.Components
                 if (!Running)
                     break;
 
-                EventManager.FireEvent("OnChangeStatusText", "Running walk script");
+                Log.Status("Running walk script");
 
                 var arguments = scriptLine.Split(' ');
                 var commandName = arguments.Length == 0 ? scriptLine : arguments[0];
@@ -221,7 +221,7 @@ namespace RSBot.Core.Components
                )
                 return default; //Invalid format
 
-            return new(xOffset, yOffset, zOffset, xSector, ySector);
+            return new(xSector, ySector, xOffset, yOffset, zOffset);
         }
 
         /// <summary>

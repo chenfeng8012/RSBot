@@ -1,8 +1,6 @@
-﻿using RSBot.Core.Event;
-
-namespace RSBot.Core.Network.Handler.Agent.Action
+﻿namespace RSBot.Core.Network.Handler.Agent.Party
 {
-    internal class ActionDeselectResponse : IPacketHandler
+    internal class PartyUpdateResponseNew : IPacketHandler
     {
         /// <summary>
         /// Gets or sets the opcode.
@@ -10,7 +8,7 @@ namespace RSBot.Core.Network.Handler.Agent.Action
         /// <value>
         /// The opcode.
         /// </value>
-        public ushort Opcode => 0xB04B;
+        public ushort Opcode => 0x3E6E;
 
         /// <summary>
         /// Gets or sets the destination.
@@ -26,11 +24,7 @@ namespace RSBot.Core.Network.Handler.Agent.Action
         /// <param name="packet">The packet.</param>
         public void Invoke(Packet packet)
         {
-            if (packet.ReadByte() != 1) 
-                return;
-
-            //Game.SelectedEntity = null;
-            EventManager.FireEvent("OnDeselectEntity");
+            PartyUpdateResponse.PartyUpdateResponseCommon(packet);
         }
     }
 }

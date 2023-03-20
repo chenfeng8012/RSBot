@@ -62,13 +62,11 @@ internal class MoveScriptCommand : IScriptCommand
             IsBusy = true;
 
             while (Game.Player.InAction)
-                Thread.Sleep(50);
+                Thread.Sleep(100);
 
             const int retryAttempts = 5;
             var stepRetryCounter = 0;
 
-            //In some cases the move command fails for no reason, that's why we retry the move x times if it fails.
-            //This bug is server side. Sometimes it simply sends back a failed packet because the player state doesn't allow to move.
             while (!ExecuteMove(arguments))
             {
                 if (!IsBusy)
@@ -112,7 +110,7 @@ internal class MoveScriptCommand : IScriptCommand
             return false; //Invalid format
         }
    
-        Position pos = new(xOffset, yOffset, zOffset, xSector, ySector);
+        Position pos = new(xSector, ySector, xOffset, yOffset, zOffset);
 
         if (PlayerConfig.Get("RSBot.Walkback.UseMount", true))
         {
@@ -133,7 +131,7 @@ internal class MoveScriptCommand : IScriptCommand
             return false;
         }
 
-        Log.Debug($"[Script] Move to position X={pos.X}, Y={pos.Y}");
+        Log.Debug($"[Script] Move to position {pos.Region}({pos.Region.X},{pos.Region.Y}) X={pos.X}, Y={pos.Y}");
 
         return Game.Player.MoveTo(pos);
     }
